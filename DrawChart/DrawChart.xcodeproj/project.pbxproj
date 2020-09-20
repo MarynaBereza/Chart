@@ -12,6 +12,8 @@
 		429BFA872517E9EE00226A0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429BFA862517E9EE00226A0D /* ViewController.swift */; };
 		429BFA8C2517E9EF00226A0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 429BFA8B2517E9EF00226A0D /* Assets.xcassets */; };
 		429BFA8F2517E9EF00226A0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 429BFA8D2517E9EF00226A0D /* LaunchScreen.storyboard */; };
+		429BFA972517EAEA00226A0D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429BFA962517EAEA00226A0D /* Model.swift */; };
+		429BFA992517EB1600226A0D /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429BFA982517EB1600226A0D /* ChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		429BFA8B2517E9EF00226A0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		429BFA8E2517E9EF00226A0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		429BFA902517E9EF00226A0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		429BFA962517EAEA00226A0D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		429BFA982517EB1600226A0D /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +58,11 @@
 		429BFA812517E9EE00226A0D /* DrawChart */ = {
 			isa = PBXGroup;
 			children = (
-				429BFA822517E9EE00226A0D /* AppDelegate.swift */,
-				429BFA842517E9EE00226A0D /* SceneDelegate.swift */,
+				429BFA962517EAEA00226A0D /* Model.swift */,
+				429BFA982517EB1600226A0D /* ChartView.swift */,
 				429BFA862517E9EE00226A0D /* ViewController.swift */,
+				429BFA842517E9EE00226A0D /* SceneDelegate.swift */,
+				429BFA822517E9EE00226A0D /* AppDelegate.swift */,
 				429BFA8B2517E9EF00226A0D /* Assets.xcassets */,
 				429BFA8D2517E9EF00226A0D /* LaunchScreen.storyboard */,
 				429BFA902517E9EF00226A0D /* Info.plist */,
@@ -137,6 +143,8 @@
 				429BFA872517E9EE00226A0D /* ViewController.swift in Sources */,
 				429BFA832517E9EE00226A0D /* AppDelegate.swift in Sources */,
 				429BFA852517E9EE00226A0D /* SceneDelegate.swift in Sources */,
+				429BFA992517EB1600226A0D /* ChartView.swift in Sources */,
+				429BFA972517EAEA00226A0D /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
