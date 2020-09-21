@@ -10,7 +10,7 @@ import UIKit
 
 struct ChartsModel {
     let modelsArray: [ChartModel]
-    var indexModel: Int = 0
+    var modelIndex: Int = 0
 }
 
 

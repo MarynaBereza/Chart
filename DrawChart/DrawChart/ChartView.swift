@@ -10,32 +10,25 @@ import UIKit
 
 class ChartView: UIView {
     
-    func drawChart(fromChartsModel chartsModel: ChartsModel, withAnimation animation: Bool) {
-        
-        var chartsModel = chartsModel
-        let chartsModelArray = chartsModel.modelsArray
-        
-        if chartsModel.indexModel >= chartsModelArray.count {
-            chartsModel.indexModel = 0
-        }
+    func drawChart(from chartModel: ChartModel, withAnimation animation: Bool) {
+
         
         self.layer.sublayers = nil
+
         
-        let chart = chartsModelArray[chartsModel.indexModel]
-        
-        for (index,column) in chart.columnsArray.enumerated() {
+        for (index,column) in chartModel.columnsArray.enumerated() {
             
             let point = column.value
             
             let rectLayer = CAShapeLayer()
             
-            let k = self.calculationCoefficientFor(chart: chart)
+            let k = self.calculationCoefficientFor(chart: chartModel)
             
-            let layerFrame = CGRect(x: CGFloat(index) * frame.width / CGFloat(chart.columnsArray.count), y:CGFloat(0), width: frame.width / CGFloat(chart.columnsArray.count), height: frame.height)
+            let layerFrame = CGRect(x: CGFloat(index) * frame.width / CGFloat(chartModel.columnsArray.count), y:CGFloat(0), width: frame.width / CGFloat(chartModel.columnsArray.count), height: frame.height)
             
             rectLayer.frame = layerFrame.insetBy(dx: 3, dy: 3)
             
-            rectLayer.lineWidth = frame.width / CGFloat(chart.columnsArray.count)
+            rectLayer.lineWidth = frame.width / CGFloat(chartModel.columnsArray.count)
             
             self.layer.addSublayer(rectLayer)
             

@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var chart: ChartView?
+    let chartView = ChartView()
     var chartsModel: ChartsModel!
     var timer: Timer!
     
@@ -22,13 +22,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        chart = ChartView.init(frame: view.frame)
-        
-        guard let chartView = chart else {
-            return
-        }
-        
+    
         view.addSubview(chartView)
         
         chartView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +31,7 @@ class ViewController: UIViewController {
         
         chartView.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 0).isActive = true
         chartView.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 0).isActive = true
-        chartView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 0).isActive = true
+        chartView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 50).isActive = true
         chartView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 0).isActive = true
         view.layoutIfNeeded()
         
@@ -57,7 +51,9 @@ class ViewController: UIViewController {
         
         createChartsModel()
         
-        chartView.drawChart(fromChartsModel: chartsModel, withAnimation: true)
+        let chartModel = chartsModel.modelsArray[0]
+        
+        chartView.drawChart(from: chartModel, withAnimation: true)
     }
     
     //MARK: - Create models
@@ -66,8 +62,8 @@ class ViewController: UIViewController {
         
         let color = UIColor.randomColor()
         
-        let x = CGFloat(arc4random_uniform(100))
-        let y = CGFloat(arc4random_uniform(100))
+        let x = CGFloat.random(in: 20...100)
+        let y = CGFloat.random(in: 20...100)
         let column = ColumnModel(color: color, value: CGPoint(x: x, y: y))
         
         return column
@@ -77,9 +73,9 @@ class ViewController: UIViewController {
     func createChartModel() -> ChartModel {
         
         var columnsArray = [ColumnModel]()
-        let numb = Int(arc4random_uniform(10) + 5)
+        let columnsCount = Int.random(in: 5...10)
         
-        for _ in (0..<numb) {
+        for _ in (0..<columnsCount) {
             let columnModel = self.createColumnModel()
             columnsArray.append(columnModel)
         }
@@ -94,9 +90,9 @@ class ViewController: UIViewController {
         
         var modelsArray = [ChartModel]()
         
-        let numb = Int(arc4random_uniform(5) + 2)
+        let modelsCount = Int.random(in: 3...5)
         
-        for _ in (0..<numb) {
+        for _ in (0..<modelsCount) {
             let chartModel = self.createChartModel()
             modelsArray.append(chartModel)
         }
@@ -108,14 +104,10 @@ class ViewController: UIViewController {
     
     @objc func deviceOrientationDidChange() {
         
-        guard let chartView = chart else {
-            return
-        }
-        guard let chartsModel = chartsModel else {
-            return
-        }
+        let chartModel = chartsModel.modelsArray[chartsModel.modelIndex]
         
-        chartView.drawChart(fromChartsModel:chartsModel , withAnimation: false)
+        
+        chartView.drawChart(from:chartModel, withAnimation: false)
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -126,46 +118,43 @@ class ViewController: UIViewController {
         
         timer = nil
         
-        guard let chartView = chart else {
-            return
-        }
+        self.increaseNextChartModelIndex()
         
-        self.defineNextChartModelIndex()
+        let chartModel = chartsModel.modelsArray[chartsModel.modelIndex]
         
-        chartView.drawChart(fromChartsModel: chartsModel, withAnimation: true)
+        chartView.drawChart(from: chartModel, withAnimation: true)
         
-        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(handleTimer), userInfo: nil, repeats: true)
+        
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleTimer), userInfo: nil, repeats: true)
     }
     
     
     @objc func handleTimer() {
+
+        self.increaseNextChartModelIndex()
         
-        guard let chartView = chart else {
-            return
-        }
+        let chartModel = chartsModel.modelsArray[chartsModel.modelIndex]
         
-        self.defineNextChartModelIndex()
-        
-        chartView.drawChart(fromChartsModel: chartsModel, withAnimation: true)
+        chartView.drawChart(from: chartModel, withAnimation: true)
     }
     
     
-    func defineNextChartModelIndex()  {
+    func increaseNextChartModelIndex()  {
         
-        if chartsModel.indexModel >=  chartsModel.modelsArray.count {
-            chartsModel.indexModel = 0
+        chartsModel.modelIndex += 1
+        
+        if chartsModel.modelIndex == chartsModel.modelsArray.count {
+            chartsModel.modelIndex = 0
         }
-        chartsModel.indexModel = chartsModel.indexModel + 1
     }
 }
-
 //MARK: - Extension
 extension UIColor {
     static func randomColor() -> UIColor {
         
-        let r = (CGFloat)(arc4random() % 256) / 255;
-        let g = (CGFloat)(arc4random() % 256) / 255;
-        let b = (CGFloat)(arc4random() % 256) / 255;
+        let r = CGFloat.random(in: (0..<1))
+        let g = CGFloat.random(in: (0..<1))
+        let b = CGFloat.random(in: (0..<1))
         let color = UIColor(red: r, green: g, blue: b, alpha: 1)
         
         return color
